@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <form>
+      Syntymäpäivämäärä (dd.mm.yyyy): <input type="text" id="birthdate">
+      <br>
+      <button type="button" onclick="calculateAgeAndBirthday()">Laske ikä ja syntymäpäivä</button>
+    </form>
+    <br>
+    Ikä: <span id="age"></span>
+    <br>
+    Syntymäpäivä: <span id="birthday"></span>
+    <script>
+      function calculateAgeAndBirthday() {
+        var birthdate = document.getElementById("birthdate").value;
+        var birthdateArray = birthdate.split(".");
+        var birthdateObject = new Date(birthdateArray[2], birthdateArray[1] - 1, birthdateArray[0]);
+        var today = new Date();
+        var age = today.getFullYear() - birthdateObject.getFullYear();
+        var month = today.getMonth() - birthdateObject.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < birthdateObject.getDate())) {
+            age--;
+        }
+        document.getElementById("age").innerHTML = age;
+        var days = ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"];
+        var dayOfWeek = days[birthdateObject.getUTCDay()];
+        document.getElementById("birthday").innerHTML = dayOfWeek;
+      }
+    </script>
+  </body>
+</html>0000000
